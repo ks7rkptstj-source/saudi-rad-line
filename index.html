@@ -5,50 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مبادرة السعودية خط أحمر - مدرسة عبدالله بن مسعود</title>
     <style>
+        :root {
+            --primary-green: #166534;
+            --light-green: #f0fdf4;
+            --accent-gold: #d97706;
+            --text-dark: #1e293b;
+            --bg-gradient: linear-gradient(135deg, #f4f9f4 0%, #e2f0e2 100%);
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f4f9f4 0%, #e2f0e2 100%);
-            color: #2c3e50;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 20px;
         }
         .card {
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            max-width: 600px;
-            width: 100%;
-            padding: 30px;
-            text-align: center;
-            border-top: 6px solid #166534;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-top: 6px solid var(--primary-green);
         }
         h1 {
-            color: #166534;
-            font-size: 24px;
+            color: var(--primary-green);
+            font-size: 22px;
+            text-align: center;
             margin-bottom: 15px;
         }
+        h2 {
+            color: var(--primary-green);
+            font-size: 18px;
+            border-bottom: 2px solid var(--light-green);
+            padding-bottom: 8px;
+            margin-top: 25px;
+        }
         .quote {
-            background: #f8fafc;
-            border-right: 4px solid #166534;
+            background: var(--light-green);
+            border-right: 4px solid var(--primary-green);
             padding: 15px;
-            margin: 20px 0;
+            margin: 15px 0;
             text-align: right;
             font-style: italic;
             color: #334155;
             border-radius: 4px;
+            font-size: 15px;
         }
-        p {
+        p, label {
             line-height: 1.8;
-            font-size: 16px;
+            font-size: 15px;
             color: #475569;
         }
-        .footer {
-            margin-top: 30px;
+        /* معرض الصور والفيديوهات */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .media-box {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            color: #64748b;
             font-size: 14px;
+        }
+        /* نموذج المشاركات */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 5px rgba(22, 101, 52, 0.2);
+        }
+        button {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #14532d;
+        }
+        /* لوحة المشاركات المرسلة */
+        #submissions-list {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .submission-item {
+            background: #f8fafc;
+            border-right: 3px solid var(--accent-gold);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .submission-author {
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 4px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
             color: #64748b;
             border-top: 1px solid #e2e8f0;
             padding-top: 15px;
@@ -57,21 +146,81 @@
 </head>
 <body>
 
-    <div class="card">
-        <h1>🇸🇦 لأن الوطن غالٍ… وأمنه مسؤوليتنا جميعًا 💚</h1>
-        <p>انطلاقًا من المادة (٣٤) من النظام الأساسي للحكم، التي تنص على:</p>
-        
-        <div class="quote">
-            «الدفاع عن العقيدة الإسلامية، والمجتمع، والوطن واجب على كل مواطن، ويبين النظام أحكام الخدمة العسكرية».
+    <div class="container">
+        <!-- البطاقة الترحيبية والمادة -->
+        <div class="card">
+            <h1>🇸🇦 لأن الوطن غالٍ… وأمنه مسؤوليتنا جميعًا 💚</h1>
+            <p>انطلاقًا من المادة (٣٤) من النظام الأساسي للحكم، التي تنص على:</p>
+            
+            <div class="quote">
+                «الدفاع عن العقيدة الإسلامية، والمجتمع، والوطن واجب على كل مواطن، ويبين النظام أحكام الخدمة العسكرية».
+            </div>
+
+            <p>ندعوكم للمشاركة في فعاليات مبادرة <strong>«السعودية خط أحمر»</strong> في <strong>مدرسة عبدالله بن مسعود الابتدائية للبنين</strong>، تعزيزًا لقيم الولاء والانتماء، والوعي بدور طلابنا الأبطال في الحفاظ على أمن وطننا ووحدته.</p>
         </div>
 
-        <p>ندعوكم لزيارة مبادرة <strong>«السعودية خط أحمر»</strong> في <strong>مدرسة عبدالله بن مسعود الابتدائية للبنين</strong>، تعزيزًا لقيم الولاء والانتماء، والوعي بدور طلابنا في الحفاظ على أمن وطننا ووحدته.</p>
+        <!-- معرض الصور والفيديوهات -->
+        <div class="card">
+            <h2>📸 معرض الصور وفيديوهات الفعاليات</h2>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 10px;">توثيق أنشطة ومشاركات طلاب مدرسة عبدالله بن مسعود:</p>
+            <div class="gallery-grid">
+                <div class="media-box">
+                    🎥 فيديو كلمة طلاب المدرسة عن الأمن الوطني
+                </div>
+                <div class="media-box">
+                    🖼️ معرض رسومات الطلاب الوطنية
+                </div>
+            </div>
+        </div>
 
+        <!-- قسم مشاركات الطلاب (رسم / كتابة) -->
+        <div class="card">
+            <h2>✍️ سجل مشاركات وعبارات الطلاب في حب الوطن</h2>
+            <p style="font-size: 13px; color: #64748b;">شاركنا بكلمة أو عبارة وطنية يعبر بها ابننا الطالب:</p>
+            
+            <form id="partForm">
+                <div>
+                    <label for="studentName">اسم الطالب و الصف:</label>
+                    <input type="text" id="studentName" placeholder="مثال: محمد أحمد - الصف الرابع" required>
+                </div>
+                <div>
+                    <label for="studentMsg">رسالة أو مشاركة في حب الوطن:</label>
+                    <textarea id="studentMsg" rows="3" placeholder="اكتب عبارتك الوطنية هنا..." required></textarea>
+                </div>
+                <button type="submit">إرسال المشاركة 🇸🇦</button>
+            </form>
+
+            <div id="submissions-list">
+                <!-- ستظهر المشاركات المضافة هنا تلقائياً -->
+            </div>
+        </div>
+
+        <!-- تذييل الصفحة -->
         <div class="footer">
-            مدرسة عبدالله بن مسعود الابتدائية<br>
+            مدرسة عبدالله بن مسعود الابتدائية للبنين<br>
             الإدارة العامة للتعليم بمنطقة الجوف 🇸🇦
         </div>
     </div>
+
+    <script>
+        // كود برمجي بسيط لجعل نموذج المشاركات يعمل فورياً وتظهر المشاركة تحت الصفحة
+        const form = document.getElementById('partForm');
+        const list = document.getElementById('submissions-list');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('studentName').value;
+            const msg = document.getElementById('studentMsg').value;
+
+            const item = document.createElement('div');
+            item.className = 'submission-item';
+            item.innerHTML = `<div class="submission-author">👤 ${name}</div><div>${msg}</div>`;
+            
+            list.prepend(item);
+            form.reset();
+            alert('شكرًا لك! تم نشر مشاركتك بنجاح في المبادرة 🇸🇦');
+        });
+    </script>
 
 </body>
 </html>
